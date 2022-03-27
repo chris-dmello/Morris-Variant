@@ -2,7 +2,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MinMaxOpening {
+
+    public static void generateMovesOpening(Piece board){
+         
+    }
+    
+    public static void generateAdd(Piece board){
+         
+    }
+
     public static void main(String[] args) {
+        if(args.length != 3) {
+            System.out.println("Please provide the correct arguments.");
+            return;
+        }
         String in = args[0];
         String out = args[1];
         int depth = Integer.parseInt(args[2]);
