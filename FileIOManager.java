@@ -11,6 +11,8 @@ class FileIOManager {
         String line = scanner.nextLine();
 
         scanner.close();
+
+		System.out.println("Board Position: " + line);
         Piece[] board = new Piece[21];
         char[] charline = line.substring(0, 21).toCharArray();
         for (int i = 0; i < 21; i++) {
