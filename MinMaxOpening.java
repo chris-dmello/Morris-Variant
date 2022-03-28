@@ -3,16 +3,8 @@ import java.io.IOException;
 
 public class MinMaxOpening {
 
-    public static void generateMovesOpening(Piece board){
-         
-    }
-    
-    public static void generateAdd(Piece board){
-         
-    }
-
     public static void main(String[] args) {
-        if(args.length != 3) {
+        if (args.length != 3) {
             System.out.println("Please provide the correct arguments.");
             return;
         }
@@ -21,7 +13,7 @@ public class MinMaxOpening {
         int depth = Integer.parseInt(args[2]);
 
         System.out.format("Input file  | %s\nOutput File | %s\nDepth       | %d\n", in, out, depth);
-        Piece[] board;
+        Board board;
         try {
             board = FileIOManager.parseInput(in);
         } catch (FileNotFoundException fnfe) {
