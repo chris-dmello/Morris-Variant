@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Board {
     private ArrayList<Piece> positions = new ArrayList<Piece>();
 
-    Board(String line) throws IOException {
+    Board(String line) {
         char[] charline = line.substring(0, 21).toCharArray();
 
         for (int i = 0; i < 21; i++) {
@@ -12,10 +12,8 @@ public class Board {
                 positions.add(Piece.WHITE);
             else if (charline[i] == 'b' || charline[i] == 'B')
                 positions.add(Piece.BLACK);
-            else if (charline[i] == 'x' || charline[i] == 'X')
-                positions.add(Piece.EMPTY);
             else
-                throw new IOException("Invalid character found in input.");
+                positions.add(Piece.EMPTY);
         }
     }
 

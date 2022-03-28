@@ -92,124 +92,124 @@ public class MorrisVariant {
      * @param j     a location in the array representing the board
      * @return
      */
-    public static boolean closeMill(Piece[] board, int j) throws IllegalArgumentException {
-        Piece C = board[j];
+    public static boolean closeMill(Board board, int j) throws IllegalArgumentException {
+        Piece C = board.get(j);
         if (C == Piece.EMPTY)
             throw new IllegalArgumentException("Position cannot be empty.");
         switch (j) {
             case 0:
-                if (board[2] == C & board[4] == C)
+                if (board.get(2) == C & board.get(4) == C)
                     return true;
-                if (board[6] == C & board[18] == C)
+                if (board.get(6) == C & board.get(18) == C)
                     return true;
                 return false;
             case 1:
-                if (board[3] == C & board[5] == C)
+                if (board.get(3) == C & board.get(5) == C)
                     return true;
-                if (board[11] == C & board[20] == C)
+                if (board.get(11) == C & board.get(20) == C)
                     return true;
                 return false;
             case 2:
-                if (board[0] == C & board[4] == C)
+                if (board.get(0) == C & board.get(4) == C)
                     return true;
-                if (board[7] == C & board[15] == C)
+                if (board.get(7) == C & board.get(15) == C)
                     return true;
                 return false;
             case 3:
-                if ((board[1] == C & board[5] == C)
-                        || (board[10] == C & board[17] == C))
+                if ((board.get(1) == C & board.get(5) == C)
+                        || (board.get(10) == C & board.get(17) == C))
                     return true;
                 return false;
             case 4:
-                if ((board[2] == C & board[0] == C)
-                        || (board[8] == C & board[12] == C))
+                if ((board.get(2) == C & board.get(0) == C)
+                        || (board.get(8) == C & board.get(12) == C))
                     return true;
                 return false;
             case 5:
-                if ((board[3] == C & board[1] == C)
-                        || (board[9] == C & board[14] == C))
+                if ((board.get(3) == C & board.get(1) == C)
+                        || (board.get(9) == C & board.get(14) == C))
                     return true;
                 return false;
             case 6:
-                if ((board[0] == C & board[18] == C)
-                        || (board[7] == C & board[8] == C))
+                if ((board.get(0) == C & board.get(18) == C)
+                        || (board.get(7) == C & board.get(8) == C))
                     return true;
                 return false;
             case 7:
-                if ((board[6] == C & board[8] == C)
-                        || (board[2] == C & board[15] == C))
+                if ((board.get(6) == C & board.get(8) == C)
+                        || (board.get(2) == C & board.get(15) == C))
                     return true;
                 return false;
             case 8:
-                if ((board[7] == C & board[6] == C)
-                        || (board[4] == C & board[12] == C))
+                if ((board.get(7) == C & board.get(6) == C)
+                        || (board.get(4) == C & board.get(12) == C))
                     return true;
                 return false;
 
             case 9:
-                if ((board[5] == C & board[14] == C)
-                        || (board[10] == C & board[11] == C))
+                if ((board.get(5) == C & board.get(14) == C)
+                        || (board.get(10) == C & board.get(11) == C))
                     return true;
                 return false;
             case 10:
-                if ((board[9] == C & board[11] == C)
-                        || (board[3] == C & board[17] == C))
+                if ((board.get(9) == C & board.get(11) == C)
+                        || (board.get(3) == C & board.get(17) == C))
                     return true;
                 return false;
             case 11:
-                if ((board[10] == C & board[9] == C)
-                        || (board[1] == C & board[20] == C))
+                if ((board.get(10) == C & board.get(9) == C)
+                        || (board.get(1) == C & board.get(20) == C))
                     return true;
                 return false;
             case 12:
-                if ((board[15] == C & board[18] == C)
-                        || (board[13] == C & board[14] == C)
-                        || (board[8] == C & board[4] == C))
+                if ((board.get(15) == C & board.get(18) == C)
+                        || (board.get(13) == C & board.get(14) == C)
+                        || (board.get(8) == C & board.get(4) == C))
                     return true;
                 return false;
             case 13:
-                if ((board[12] == C & board[14] == C)
-                        || (board[16] == C & board[19] == C))
+                if ((board.get(12) == C & board.get(14) == C)
+                        || (board.get(16) == C & board.get(19) == C))
                     return true;
                 return false;
             case 14:
-                if ((board[9] == C & board[5] == C)
-                        || (board[17] == C & board[20] == C)
-                        || (board[13] == C & board[12] == C))
+                if ((board.get(9) == C & board.get(5) == C)
+                        || (board.get(17) == C & board.get(20) == C)
+                        || (board.get(13) == C & board.get(12) == C))
                     return true;
                 return false;
             case 15:
-                if ((board[12] == C & board[18] == C)
-                        || (board[7] == C & board[2] == C)
-                        || (board[16] == C & board[17] == C))
+                if ((board.get(12) == C & board.get(18) == C)
+                        || (board.get(7) == C & board.get(2) == C)
+                        || (board.get(16) == C & board.get(17) == C))
                     return true;
                 return false;
             case 16:
-                if ((board[15] == C & board[17] == C)
-                        || (board[13] == C & board[19] == C))
+                if ((board.get(15) == C & board.get(17) == C)
+                        || (board.get(13) == C & board.get(19) == C))
                     return true;
                 return false;
             case 17:
-                if ((board[14] == C & board[20] == C)
-                        || (board[10] == C & board[3] == C)
-                        || (board[16] == C & board[15] == C))
+                if ((board.get(14) == C & board.get(20) == C)
+                        || (board.get(10) == C & board.get(3) == C)
+                        || (board.get(16) == C & board.get(15) == C))
                     return true;
                 return false;
             case 18:
-                if ((board[6] == C & board[0] == C)
-                        || (board[15] == C & board[12] == C)
-                        || (board[19] == C & board[20] == C))
+                if ((board.get(6) == C & board.get(0) == C)
+                        || (board.get(15) == C & board.get(12) == C)
+                        || (board.get(19) == C & board.get(20) == C))
                     return true;
                 return false;
             case 19:
-                if ((board[18] == C & board[20] == C)
-                        || (board[16] == C & board[13] == C))
+                if ((board.get(18) == C & board.get(20) == C)
+                        || (board.get(16) == C & board.get(13) == C))
                     return true;
                 return false;
             case 20:
-                if ((board[11] == C & board[1] == C)
-                        || (board[17] == C & board[14] == C)
-                        || (board[19] == C & board[18] == C))
+                if ((board.get(11) == C & board.get(1) == C)
+                        || (board.get(17) == C & board.get(14) == C)
+                        || (board.get(19) == C & board.get(18) == C))
                     return true;
                 return false;
 
