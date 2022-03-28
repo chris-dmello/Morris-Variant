@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Board {
@@ -44,7 +43,7 @@ public class Board {
         return positions.get(i);
     }
 
-    public Piece set(int i, Piece piece) {
-        return positions.set(i, piece);
+    public Piece set(int position, Piece piece) {
+        return positions.set(position, piece);
     }
 }
