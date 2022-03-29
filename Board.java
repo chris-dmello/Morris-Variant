@@ -20,7 +20,7 @@ public class Board {
         String stringForm = "";
 
         for (int i = 0; i < 21; i++) {
-            switch (positions.get(0)) {
+            switch (positions.get(i)) {
                 case WHITE:
                     stringForm += "W";
                     break;
@@ -33,7 +33,6 @@ public class Board {
                 default:
                     break;
             }
-            positions.remove(0);
         }
 
         return stringForm;
@@ -45,5 +44,29 @@ public class Board {
 
     public Piece set(int position, Piece piece) {
         return positions.set(position, piece);
+    }
+
+    public int countWhite() {
+        int count = 0;
+        for (int i = 0; i < 21; i++) {
+            if (positions.get(i) == Piece.WHITE)
+                count++;
+        }
+        return count;
+    }
+
+    public int countBlack() {
+        int count = 0;
+        for (int i = 0; i < 21; i++) {
+            if (positions.get(i) == Piece.BLACK)
+                count++;
+        }
+        return count;
+    }
+
+    public boolean isEmpty() {
+        if (positions.size() == 0)
+            return true;
+        return false;
     }
 }
