@@ -11,8 +11,6 @@ class FileIOManager {
         String line = scanner.nextLine();
 
         scanner.close();
-
-        System.out.println("Board Position: " + line);
         
         Board board = new Board(line);
         return board;
