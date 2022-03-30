@@ -32,7 +32,7 @@ public class MoveGeneratorBlack {
         }
     }
 
-    public static ArrayList<Board> generateMovesMidGameEndgame(Board board) {
+    public static ArrayList<Board> generateMovesMidgameEndgame(Board board) {
         // Find number of Black pieces on the board
         int numBlack = 0;
         for (int i = 0; i < 21; i++) {

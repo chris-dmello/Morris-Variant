@@ -32,7 +32,7 @@ public class MoveGeneratorWhite {
         }
     }
 
-    public static ArrayList<Board> generateMovesMidGameEndgame(Board board) {
+    public static ArrayList<Board> generateMovesMidgameEndgame(Board board) {
         // Find number of White pieces on the board
         int numWhite = 0;
         for (int i = 0; i < 21; i++) {
