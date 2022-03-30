@@ -22,14 +22,19 @@ public class MoveGeneratorBlack {
     }
 
     public static void generateRemove(Board board, ArrayList<Board> L) {
+        boolean added = false;
         for (int i = 0; i < 21; i++) {
             if (board.get(i) == Piece.WHITE) {
                 if (!MorrisVariant.closeMill(board, i)) {
                     Board b = new Board(board.toString()); // Copy board
+                    b.set(i, Piece.EMPTY);
                     L.add(b);
+                    added = true;
                 }
             }
         }
+        if (!added) L.add(new Board(board.toString()));
+
     }
 
     public static ArrayList<Board> generateMovesMidgameEndgame(Board board) {
