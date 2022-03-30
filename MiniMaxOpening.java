@@ -53,7 +53,7 @@ public class MiniMaxOpening {
 
         for (int i = 1; i < children.size(); i++) {
             int iScore = findNextMoveMiniMaxOpening(children.get(i), depth - 1, false);
-            if (iScore < bestMoveScore) {
+            if (iScore > bestMoveScore) {
                 bestMove = children.get(i);
                 bestMoveScore = iScore;
             }
