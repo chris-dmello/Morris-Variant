@@ -1,4 +1,4 @@
-xxxxxxxxWWxWWxBBBxxxx
+WxxxxxxWWWWxxBxBxBxBx
 012345678901234567890
 
 xxxWxxxWxxxxxxxxBxxBx
@@ -12,3 +12,5 @@ Correct for 4: xxxWxxxWxxxxxWxxBxxBx
 
 
 xxxWxxxWxxxxxxxxxxxBB
+
+xxxxxxxxWWxWWxBBBxxxx

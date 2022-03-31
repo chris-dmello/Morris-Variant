@@ -29,14 +29,14 @@ public class ABOpening {
             return;
         }
 
-        Board output = miniMaxOpening(board, depth);
+        Board output = alphaBetaOpening(board, depth);
         System.out.println("Board Position: " + output.toString());
         System.out.println("Positions evaluatied by static estimation: " + ABOpening.count);
         System.out.println("MINIMAX Estimate: " + ABOpening.estimate);
 
     }
 
-    public static Board miniMaxOpening(Board board, int depth) {
+    public static Board alphaBetaOpening(Board board, int depth) {
         if (board.isEmpty())
             return null;
 
@@ -49,10 +49,10 @@ public class ABOpening {
 
         // Select temporary "best" child at first
         Board bestMove = children.get(0);
-        int bestMoveScore = findNextMoveMiniMaxOpening(children.get(0), depth - 1, false);
+        int bestMoveScore = findNextMoveAlphaBetaOpening(children.get(0), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
 
         for (int i = 1; i < children.size(); i++) {
-            int iScore = findNextMoveMiniMaxOpening(children.get(i), depth - 1, false);
+            int iScore = findNextMoveAlphaBetaOpening(children.get(i), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
             if (iScore > bestMoveScore) {
                 bestMove = children.get(i);
                 bestMoveScore = iScore;
@@ -66,10 +66,9 @@ public class ABOpening {
     }
 
     // Return the highest heuristic score for the given depth.
-    public static int findNextMoveMiniMaxOpening(Board board, int depth, boolean isMax) {
+    public static int findNextMoveAlphaBetaOpening(Board board, int depth, int alpha, int beta, boolean isMax) {
         // Find possible next moves and store as children.
-        ArrayList<Board> children = isMax ? MoveGeneratorWhite.generateMovesOpening(board)
-                : MoveGeneratorBlack.generateMovesOpening(board);
+        ArrayList<Board> children = isMax ? MoveGeneratorWhite.generateMovesOpening(board) : MoveGeneratorBlack.generateMovesOpening(board);
 
         int heuristic_score = isMax ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
@@ -90,12 +89,19 @@ public class ABOpening {
 
         // Recursive Case: Recurse
         for (int i = 0; i < children.size(); i++) {
-            int i_heuristic_score = findNextMoveMiniMaxOpening(children.get(i), depth - 1, !isMax);
+            int i_heuristic_score = findNextMoveAlphaBetaOpening(children.get(i), depth - 1, alpha, beta, !isMax);
 
             if (isMax) {
+                if(heuristic_score >= beta)
+                    break;
                 heuristic_score = heuristic_score > i_heuristic_score ? heuristic_score : i_heuristic_score;
-            } else
+                alpha = alpha > heuristic_score ? alpha : heuristic_score;
+            } else {
+                if(heuristic_score <= alpha)
+                    break;
                 heuristic_score = heuristic_score < i_heuristic_score ? heuristic_score : i_heuristic_score;
+                beta = beta < heuristic_score ? beta : heuristic_score;
+            }
         }
 
         System.out.println(heuristic_score + " at depth " + depth); // TODO: remove
