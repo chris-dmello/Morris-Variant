@@ -62,8 +62,8 @@ public class MoveGeneratorBlack {
                         Board b = new Board(board.toString()); // Copy board
                         b.set(alpha, Piece.EMPTY);
                         b.set(beta, Piece.BLACK);
-                        if (MorrisVariant.closeMill(board, beta))
-                            generateRemove(board, L);
+                        if (MorrisVariant.closeMill(b, beta))
+                            generateRemove(b, L);
                         else
                             L.add(b);
                     }
