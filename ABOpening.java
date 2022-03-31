@@ -79,9 +79,16 @@ public class ABOpening {
 
                 // Replace heuristic score if a higher/lower one if found depending on ply.
                 if (isMax) {
+                    if (heuristic_score >= beta)
+                        break;
                     heuristic_score = heuristic_score > i_heuristic_score ? heuristic_score : i_heuristic_score;
-                } else
+                    alpha = alpha > heuristic_score ? alpha : heuristic_score;
+                } else {
+                    if (heuristic_score <= alpha)
+                        break;
                     heuristic_score = heuristic_score < i_heuristic_score ? heuristic_score : i_heuristic_score;
+                    beta = beta < heuristic_score ? beta : heuristic_score;
+                }
             }
 
             return heuristic_score;
@@ -92,12 +99,12 @@ public class ABOpening {
             int i_heuristic_score = findNextMoveAlphaBetaOpening(children.get(i), depth - 1, alpha, beta, !isMax);
 
             if (isMax) {
-                if(heuristic_score >= beta)
+                if (heuristic_score >= beta)
                     break;
                 heuristic_score = heuristic_score > i_heuristic_score ? heuristic_score : i_heuristic_score;
                 alpha = alpha > heuristic_score ? alpha : heuristic_score;
             } else {
-                if(heuristic_score <= alpha)
+                if (heuristic_score <= alpha)
                     break;
                 heuristic_score = heuristic_score < i_heuristic_score ? heuristic_score : i_heuristic_score;
                 beta = beta < heuristic_score ? beta : heuristic_score;

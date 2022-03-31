@@ -49,10 +49,10 @@ public class ABGame {
 
         // Select temporary "best" child at first
         Board bestMove = children.get(0);
-        int bestMoveScore = findNextMoveAlphaBetaMidgameEndgame(children.get(0), depth-1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+        int bestMoveScore = findNextMoveAlphaBetaMidgameEndgame(children.get(0), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
 
         for (int i = 1; i < children.size(); i++) {
-            int iScore = findNextMoveAlphaBetaMidgameEndgame(children.get(i), depth-1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+            int iScore = findNextMoveAlphaBetaMidgameEndgame(children.get(i), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
             if (iScore > bestMoveScore) {
                 bestMove = children.get(i);
                 bestMoveScore = iScore;
@@ -80,9 +80,16 @@ public class ABGame {
 
                 // Replace heuristic score if a higher/lower one if found depending on ply.
                 if (isMax) {
+                    if (heuristic_score >= beta)
+                        break;
                     heuristic_score = heuristic_score > i_heuristic_score ? heuristic_score : i_heuristic_score;
-                } else
+                    alpha = alpha > heuristic_score ? alpha : heuristic_score;
+                } else {
+                    if (heuristic_score <= alpha)
+                        break;
                     heuristic_score = heuristic_score < i_heuristic_score ? heuristic_score : i_heuristic_score;
+                    beta = beta < heuristic_score ? beta : heuristic_score;
+                }
             }
 
             return heuristic_score;
@@ -93,12 +100,12 @@ public class ABGame {
             int i_heuristic_score = findNextMoveAlphaBetaMidgameEndgame(children.get(i), depth - 1, alpha, beta, !isMax);
 
             if (isMax) {
-                if(heuristic_score >= beta)
+                if (heuristic_score >= beta)
                     break;
                 heuristic_score = heuristic_score > i_heuristic_score ? heuristic_score : i_heuristic_score;
                 alpha = alpha > heuristic_score ? alpha : heuristic_score;
             } else {
-                if(heuristic_score <= alpha)
+                if (heuristic_score <= alpha)
                     break;
                 heuristic_score = heuristic_score < i_heuristic_score ? heuristic_score : i_heuristic_score;
                 beta = beta < heuristic_score ? beta : heuristic_score;
