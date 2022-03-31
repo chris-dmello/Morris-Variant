@@ -49,10 +49,10 @@ public class ABGame {
 
         // Select temporary "best" child at first
         Board bestMove = children.get(0);
-        int bestMoveScore = findNextMoveMiniMaxMidgameEndgame(children.get(0), depth, false);
+        int bestMoveScore = findNextMoveMiniMaxMidgameEndgame(children.get(0), depth-1, false);
 
         for (int i = 1; i < children.size(); i++) {
-            int iScore = findNextMoveMiniMaxMidgameEndgame(children.get(i), depth, false);
+            int iScore = findNextMoveMiniMaxMidgameEndgame(children.get(i), depth-1, false);
             if (iScore > bestMoveScore) {
                 bestMove = children.get(i);
                 bestMoveScore = iScore;
