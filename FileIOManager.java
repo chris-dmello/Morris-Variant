@@ -1,5 +1,7 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -14,5 +16,12 @@ class FileIOManager {
         
         Board board = new Board(line);
         return board;
+    }
+    
+    public static void writeOutput(String out, String content) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(out));
+        writer.write(content);
+
+        writer.close();
     }
 }
