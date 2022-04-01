@@ -1,6 +1,4 @@
 public class StaticEstimatorImproved {
-    // return infonity or -infinityfor win states
-
     static int MidgameEndgame(Board board) {
 
         int numBlackMoves = MoveGeneratorBlack.generateMovesMidgameEndgame(board).size();
