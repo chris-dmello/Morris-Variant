@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TournamentOpening {
+public class TournamentOpeningWhite {
 
     private static int count = 0;
     private static int estimate = 0;
@@ -35,8 +35,8 @@ public class TournamentOpening {
 
         // Output board position and stats
         System.out.println("Board Position: " + output.toString());
-        System.out.println("Positions evaluated by static estimation: " + TournamentOpening.count);
-        System.out.println("MINIMAX Estimate: " + TournamentOpening.estimate);
+        System.out.println("Positions evaluated by static estimation: " + TournamentOpeningWhite.count);
+        System.out.println("MINIMAX Estimate: " + TournamentOpeningWhite.estimate);
         try {
             FileIOManager.writeOutput(out, output.toString());
         } catch (IOException ioe) {
@@ -50,7 +50,7 @@ public class TournamentOpening {
         if (board.isEmpty())
             return null;
         if (depth < 1) {
-            TournamentOpening.estimate = staticEstimateOpening(board);
+            TournamentOpeningWhite.estimate = staticEstimateOpening(board);
             return board;
         }
 
@@ -77,7 +77,7 @@ public class TournamentOpening {
         }
 
         // Save Estimate
-        TournamentOpening.estimate = bestMoveScore;
+        TournamentOpeningWhite.estimate = bestMoveScore;
 
         // Return "best" child
         return bestMove;
@@ -159,7 +159,7 @@ public class TournamentOpening {
 
     public static int staticEstimateOpening(Board board) {
         // Increment position evaluation count
-        TournamentOpening.count++;
-        return StaticEstimator.Opening(board.countWhite(), board.countBlack());
+        TournamentOpeningWhite.count++;
+        return StaticEstimatorTournament.Opening(board);
     }
 }

@@ -160,6 +160,6 @@ public class TournamentOpeningBlack {
     public static int staticEstimateOpening(Board board) {
         // Increment position evaluation count
         TournamentOpeningBlack.count++;
-        return StaticEstimator.Opening(board.countWhite(), board.countBlack());
+        return StaticEstimatorTournament.Opening(board);
     }
 }
