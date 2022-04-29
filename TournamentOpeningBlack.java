@@ -54,8 +54,8 @@ public class TournamentOpeningBlack {
             return board;
         }
 
-        // Generate moves for white
-        ArrayList<Board> children = MoveGeneratorWhite.generateMovesOpening(board);
+        // Generate moves for black
+        ArrayList<Board> children = MoveGeneratorBlack.generateMovesOpening(board);
 
         // If the search depth is 1, just return the "best" child
         if (depth == 1)
@@ -65,12 +65,12 @@ public class TournamentOpeningBlack {
 
         // Select temporary "best" child at first
         Board bestMove = children.get(0);
-        int bestMoveScore = findNextMoveAlphaBetaOpening(children.get(0), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+        int bestMoveScore = findNextMoveAlphaBetaOpening(children.get(0), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
 
         // Find the actual "best" child
         for (int i = 1; i < children.size(); i++) {
-            int iScore = findNextMoveAlphaBetaOpening(children.get(i), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
-            if (iScore > bestMoveScore) {
+            int iScore = findNextMoveAlphaBetaOpening(children.get(i), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
+            if (iScore < bestMoveScore) {
                 bestMove = children.get(i);
                 bestMoveScore = iScore;
             }

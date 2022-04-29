@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class TestBench {
+public class RunGame  {
 
     public static void main(String[] args) {
         if (args.length != 3) {
