@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TournamentGame {
+public class TournamentGameWhite {
 
     private static int count = 0;
     private static int estimate = 0;
@@ -35,8 +35,8 @@ public class TournamentGame {
 
         // Output board position and stats
         System.out.println("Board Position: " + output.toString());
-        System.out.println("Positions evaluated by static estimation: " + TournamentGame.count);
-        System.out.println("MINIMAX Estimate: " + TournamentGame.estimate);
+        System.out.println("Positions evaluated by static estimation: " + TournamentGameWhite.count);
+        System.out.println("MINIMAX Estimate: " + TournamentGameWhite.estimate);
         try {
             FileIOManager.writeOutput(out, output.toString());
         } catch (IOException ioe) {
@@ -49,7 +49,7 @@ public class TournamentGame {
         if (board.isEmpty())
             return null;
         if (depth < 1) {
-            TournamentGame.estimate = staticEstimateMidgameEndgame(board);
+            TournamentGameWhite.estimate = staticEstimateMidgameEndgame(board);
             return board;
         }
 
@@ -75,7 +75,7 @@ public class TournamentGame {
         }
 
         // Save Estimate
-        TournamentGame.estimate = bestMoveScore;
+        TournamentGameWhite.estimate = bestMoveScore;
 
         // Return the "best" child
         return bestMove;
@@ -158,7 +158,7 @@ public class TournamentGame {
 
     public static int staticEstimateMidgameEndgame(Board board) {
         // Increment position evaluation count
-        TournamentGame.count++;
+        TournamentGameWhite.count++;
         ArrayList<Board> L = MoveGeneratorBlack.generateMovesMidgameEndgame(board);
         return StaticEstimator.MidgameEndgame(board.countWhite(), board.countBlack(), L.size());
     }
