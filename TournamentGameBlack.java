@@ -53,22 +53,22 @@ public class TournamentGameBlack {
             return board;
         }
 
-        // Generate moves for white
-        ArrayList<Board> children = MoveGeneratorWhite.generateMovesMidgameEndgame(board);
+        // Generate moves for black.
+        ArrayList<Board> children = MoveGeneratorBlack.generateMovesMidgameEndgame(board);
 
         // If the search depth is 1, just return the "best" child
         if (depth == 0)
-            return chooseMidgameEndgame(children, true);
+            return chooseMidgameEndgame(children, false);
 
         // If depth is more than 1, we need to choose the moves whos following moves give us a high score.
 
         // Select temporary "best" child at first
         Board bestMove = children.get(0);
-        int bestMoveScore = findNextMoveAlphaBetaMidgameEndgame(children.get(0), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+        int bestMoveScore = findNextMoveAlphaBetaMidgameEndgame(children.get(0), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
 
         for (int i = 1; i < children.size(); i++) {
-            int iScore = findNextMoveAlphaBetaMidgameEndgame(children.get(i), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
-            if (iScore > bestMoveScore) {
+            int iScore = findNextMoveAlphaBetaMidgameEndgame(children.get(i), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
+            if (iScore < bestMoveScore) {
                 bestMove = children.get(i);
                 bestMoveScore = iScore;
             }
