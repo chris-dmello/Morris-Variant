@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MiniMaxGameBlack {
+public class MiniMaxGame {
 
     private static int count = 0;
     private static int estimate = 0;
@@ -31,12 +31,12 @@ public class MiniMaxGameBlack {
         }
 
         // Call Minimax Function
-        Board output = miniMaxMidgameEndgameBlack(board, depth);
+        Board output = miniMaxMidgameEndgame(board, depth);
 
         // Output board position and stats
         System.out.println("Board Position: " + output.toString());
-        System.out.println("Positions evaluated by static estimation: " + MiniMaxGameBlack.count);
-        System.out.println("MINIMAX Estimate: " + MiniMaxGameBlack.estimate);
+        System.out.println("Positions evaluated by static estimation: " + MiniMaxGame.count);
+        System.out.println("MINIMAX Estimate: " + MiniMaxGame.estimate);
         try {
             FileIOManager.writeOutput(out, output.toString());
         } catch (IOException ioe) {
@@ -44,48 +44,48 @@ public class MiniMaxGameBlack {
         }
     }
 
-    public static Board miniMaxMidgameEndgameBlack(Board board, int depth) {
+    public static Board miniMaxMidgameEndgame(Board board, int depth) {
         // Handle null cases
         if (board.isEmpty())
             return null;
-        if (depth < 1) {
-            MiniMaxGameBlack.estimate = staticEstimateMidgameEndgame(board);
+        if(depth < 1) {
+            MiniMaxGame.estimate = staticEstimateMidgameEndgame(board);
             return board;
         }
 
-        // Generate moves for black.
-        ArrayList<Board> children = MoveGeneratorBlack.generateMovesMidgameEndgame(board);
+        // Generate moves for white
+        ArrayList<Board> children = MoveGeneratorWhite.generateMovesMidgameEndgame(board);
 
         // If the search depth is 1, just return the "best" child
         if (depth == 1)
-            return chooseMidgameEndgame(children, false);
+            return chooseMidgameEndgame(children, true);
 
-        // If depth is more than 1, we need to choose the moves whos following moves
-        // give us a high score.
+        // If depth is more than 1, we need to choose the moves whos following moves give us a high score.
 
         // Select temporary "best" child at first
         Board bestMove = children.get(0);
-        int bestMoveScore = findNextMoveMiniMaxMidgameEndgameBlack(children.get(0), depth - 1, true);
+        int bestMoveScore = findNextMoveMiniMaxMidgameEndgame(children.get(0), depth - 1, false);
 
         for (int i = 1; i < children.size(); i++) {
-            int iScore = findNextMoveMiniMaxMidgameEndgameBlack(children.get(i), depth - 1, true);
-            if (iScore < bestMoveScore) {
+            int iScore = findNextMoveMiniMaxMidgameEndgame(children.get(i), depth - 1, false);
+            if (iScore > bestMoveScore) {
                 bestMove = children.get(i);
                 bestMoveScore = iScore;
             }
         }
 
         // Save Estimate
-        MiniMaxGameBlack.estimate = bestMoveScore;
+        MiniMaxGame.estimate = bestMoveScore;
 
         // Return the "best" child
         return bestMove;
     }
 
     // Return the highest heuristic score for the given depth.
-    public static int findNextMoveMiniMaxMidgameEndgameBlack(Board board, int depth, boolean isMax) {
-        // Find possible next moves and store as children.
+    public static int findNextMoveMiniMaxMidgameEndgame(Board board, int depth, boolean isMax) {
+        // Find possible next moves and store as children. (depending on isMax)
         ArrayList<Board> children = isMax ? MoveGeneratorWhite.generateMovesMidgameEndgame(board) : MoveGeneratorBlack.generateMovesMidgameEndgame(board);
+
         // Depending on isMax, either choose an initial heuristic score of "infinity" or "negative infinity"
         int heuristic_score = isMax ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
@@ -106,7 +106,7 @@ public class MiniMaxGameBlack {
 
         // Recursive Case: Recurse over input, reduce depth and flip isMax
         for (int i = 0; i < children.size(); i++) {
-            int i_heuristic_score = findNextMoveMiniMaxMidgameEndgameBlack(children.get(i), depth - 1, !isMax);
+            int i_heuristic_score = findNextMoveMiniMaxMidgameEndgame(children.get(i), depth - 1, !isMax);
 
             if (isMax) {
                 heuristic_score = heuristic_score > i_heuristic_score ? heuristic_score : i_heuristic_score;
@@ -121,7 +121,7 @@ public class MiniMaxGameBlack {
         // Handle null case
         if (L.size() == 0)
             return null;
-            
+
         // Select temporary "best" move at first
         Board chosen = L.get(0);
         int chosen_heuristic_score = staticEstimateMidgameEndgame(L.get(0));
@@ -143,7 +143,7 @@ public class MiniMaxGameBlack {
 
     public static int staticEstimateMidgameEndgame(Board board) {
         // Increment position evaluation count
-        MiniMaxGameBlack.count++;
+        MiniMaxGame.count++;
         ArrayList<Board> L = MoveGeneratorBlack.generateMovesMidgameEndgame(board);
         return StaticEstimator.MidgameEndgame(board.countWhite(), board.countBlack(), L.size());
     }
